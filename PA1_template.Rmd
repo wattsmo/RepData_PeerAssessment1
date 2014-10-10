@@ -20,6 +20,12 @@ library(ggplot2)
 library(lubridate)
 ```
 
+show software version
+
+```{r}
+sessionInfo()
+```
+
 ## Loading and preprocessing the data
 Loads the data into a data.table and converts the date column into a date type, and steps column to numeric.
 

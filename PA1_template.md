@@ -25,6 +25,35 @@ library(lubridate)
 ##     hour, mday, month, quarter, wday, week, yday, year
 ```
 
+show software version
+
+
+```r
+sessionInfo()
+```
+
+```
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+## 
+## locale:
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] lubridate_1.3.3  ggplot2_1.0.0    data.table_1.9.5
+## 
+## loaded via a namespace (and not attached):
+##  [1] chron_2.3-45     colorspace_1.2-4 digest_0.6.4     evaluate_0.5.5  
+##  [5] formatR_1.0      grid_3.1.1       gtable_0.1.2     htmltools_0.2.6 
+##  [9] knitr_1.6        MASS_7.3-35      memoise_0.2.1    munsell_0.4.2   
+## [13] plyr_1.8.1       proto_0.3-10     Rcpp_0.11.3      reshape2_1.4    
+## [17] rmarkdown_0.3.3  scales_0.2.4     stringr_0.6.2    tools_3.1.1     
+## [21] yaml_2.1.13
+```
+
 ## Loading and preprocessing the data
 Loads the data into a data.table and converts the date column into a date type, and steps column to numeric.
 
@@ -94,7 +123,7 @@ ggplot(stepsPerDay, aes(x=sumSteps)) +
          y="Frequency")
 ```
 
-![plot of chunk unnamed-chunk-3](./PA1_template_files/figure-html/unnamed-chunk-3.png) 
+![plot of chunk unnamed-chunk-4](./PA1_template_files/figure-html/unnamed-chunk-4.png) 
 
 *Comment: the histogram shows a skew in the data caused by a peak in the lowest bin range.*
 
@@ -144,7 +173,7 @@ ggplot(stepsPerInterval, aes(x=interval, y=meanSteps)) + geom_line() +
                  x="5-minunte Intervals", y="Average Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-6](./PA1_template_files/figure-html/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-7](./PA1_template_files/figure-html/unnamed-chunk-7.png) 
 
 *Comment: there is a very low level of activity from late at night to early in morning as one might expect.  Also a large spike between 0800 and 0915 maybe when a significant number of people are getting up and going to work.*
 
@@ -233,7 +262,7 @@ ggplot(adjStepsPerDay, aes(x=sumSteps)) +
          y="Frequency")
 ```
 
-![plot of chunk unnamed-chunk-11](./PA1_template_files/figure-html/unnamed-chunk-11.png) 
+![plot of chunk unnamed-chunk-12](./PA1_template_files/figure-html/unnamed-chunk-12.png) 
 
 *Comment: the histogram of the adjusted steps seems to be approximately a symmetric and normal-like distribution.*
 
@@ -302,6 +331,6 @@ ggplot(stepsPerIntervalDaytype, aes(interval,meanSteps)) + geom_line() +
                  x="5-minunte Intervals", y="Average Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-15](./PA1_template_files/figure-html/unnamed-chunk-15.png) 
+![plot of chunk unnamed-chunk-16](./PA1_template_files/figure-html/unnamed-chunk-16.png) 
 
 *Comment: There can be seen a number of differences in the activity pattern in the week and at the weekend.  The weekend pattern shows a later and more gradual increase in early morning activity, there is is still a peak around the same time but the peak is lower, with more activity during the subsequent day.*
