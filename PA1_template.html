@@ -65,6 +65,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ol>
 <pre class="r"><code>library(data.table)
 options(datatable.print.topn=2)
+options(datatable.print.nrows=20)
 library(ggplot2)
 library(lubridate)</code></pre>
 <pre><code>## 
@@ -102,12 +103,13 @@ data[,`:=`(date=ymd(date), steps=as.numeric(steps))]</code></pre>
 <div id="sum-the-steps-on-a-per-day-basis-removing-missing-data" class="section level3">
 <h3>Sum the steps on a per day basis removing missing data</h3>
 <pre class="r"><code>stepsPerDay &lt;- data[, .(sumSteps = sum(steps, na.rm=TRUE)), keyby=&quot;date&quot;]
-stepsPerDay[1:4]</code></pre>
-<pre><code>##          date sumSteps
-## 1: 2012-10-01        0
-## 2: 2012-10-02      126
-## 3: 2012-10-03    11352
-## 4: 2012-10-04    12116</code></pre>
+print(stepsPerDay)</code></pre>
+<pre><code>##           date sumSteps
+##  1: 2012-10-01        0
+##  2: 2012-10-02      126
+## ---                    
+## 60: 2012-11-29     7047
+## 61: 2012-11-30        0</code></pre>
 </div>
 <div id="plot-the-frequency-of-total-steps-per-day" class="section level3">
 <h3>Plot the frequency of total steps per day</h3>
@@ -133,12 +135,13 @@ statsPerDay</code></pre>
 <div id="average-number-of-steps-per-interval-removing-missing-data" class="section level3">
 <h3>Average number of steps per interval removing missing data</h3>
 <pre class="r"><code>stepsPerInterval &lt;- data[, .(meanSteps = mean(steps, na.rm=TRUE)), keyby=&quot;interval&quot;]
-stepsPerInterval[1:4]</code></pre>
-<pre><code>##    interval meanSteps
-## 1:        0    1.7170
-## 2:        5    0.3396
-## 3:       10    0.1321
-## 4:       15    0.1509</code></pre>
+print(stepsPerInterval)</code></pre>
+<pre><code>##      interval meanSteps
+##   1:        0    1.7170
+##   2:        5    0.3396
+##  ---                   
+## 287:     2350    0.2264
+## 288:     2355    1.0755</code></pre>
 </div>
 <div id="plot-the-average-number-of-the-steps-against-the-interval." class="section level3">
 <h3>Plot the average number of the steps against the interval.</h3>
@@ -191,12 +194,13 @@ adjData[, intMeanSteps:= mean(steps, na.rm=TRUE), by=interval][
 <div id="total-the-steps-on-a-per-day-basis" class="section level3">
 <h3>Total the steps on a per day basis</h3>
 <pre class="r"><code>adjStepsPerDay &lt;- adjData[, .(sumSteps = sum(steps)), keyby=&quot;date&quot;]
-adjStepsPerDay[1:4]</code></pre>
-<pre><code>##          date sumSteps
-## 1: 2012-10-01    10766
-## 2: 2012-10-02      126
-## 3: 2012-10-03    11352
-## 4: 2012-10-04    12116</code></pre>
+print(adjStepsPerDay)</code></pre>
+<pre><code>##           date sumSteps
+##  1: 2012-10-01    10766
+##  2: 2012-10-02      126
+## ---                    
+## 60: 2012-11-29     7047
+## 61: 2012-11-30    10766</code></pre>
 </div>
 <div id="plot-the-revised-frequency-of-total-adjusted-steps-in-a-day" class="section level3">
 <h3>Plot the revised frequency of total adjusted steps in a day</h3>
@@ -236,12 +240,13 @@ meanMedian</code></pre>
 <div id="average-number-of-steps-per-daytype-and-interval" class="section level3">
 <h3>Average number of steps per daytype and interval</h3>
 <pre class="r"><code>stepsPerIntervalDaytype &lt;- adjData[, .(meanSteps = mean(steps)), by=&quot;daytype,interval&quot;]
-stepsPerIntervalDaytype[1:4]</code></pre>
-<pre><code>##    daytype interval meanSteps
-## 1: weekday        0    2.2512
-## 2: weekday        5    0.4453
-## 3: weekday       10    0.1732
-## 4: weekday       15    0.1979</code></pre>
+print(stepsPerIntervalDaytype)</code></pre>
+<pre><code>##      daytype interval meanSteps
+##   1: weekday        0    2.2512
+##   2: weekday        5    0.4453
+##  ---                           
+## 575: weekend     2350    0.0283
+## 576: weekend     2355    0.1344</code></pre>
 </div>
 <div id="plot-activity-patterns-for-both-weekends-and-weekdays" class="section level3">
 <h3>Plot activity patterns for both weekends and weekdays</h3>

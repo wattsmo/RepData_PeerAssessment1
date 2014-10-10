@@ -11,6 +11,7 @@ This script uses three loadable libraries
 ```r
 library(data.table)
 options(datatable.print.topn=2)
+options(datatable.print.nrows=20)
 library(ggplot2)
 library(lubridate)
 ```
@@ -70,15 +71,16 @@ summary(data)
 
 ```r
 stepsPerDay <- data[, .(sumSteps = sum(steps, na.rm=TRUE)), keyby="date"]
-stepsPerDay[1:4]
+print(stepsPerDay)
 ```
 
 ```
-##          date sumSteps
-## 1: 2012-10-01        0
-## 2: 2012-10-02      126
-## 3: 2012-10-03    11352
-## 4: 2012-10-04    12116
+##           date sumSteps
+##  1: 2012-10-01        0
+##  2: 2012-10-02      126
+## ---                    
+## 60: 2012-11-29     7047
+## 61: 2012-11-30        0
 ```
 
 ### Plot the frequency of total steps per day
@@ -118,15 +120,16 @@ statsPerDay
 
 ```r
 stepsPerInterval <- data[, .(meanSteps = mean(steps, na.rm=TRUE)), keyby="interval"]
-stepsPerInterval[1:4]
+print(stepsPerInterval)
 ```
 
 ```
-##    interval meanSteps
-## 1:        0    1.7170
-## 2:        5    0.3396
-## 3:       10    0.1321
-## 4:       15    0.1509
+##      interval meanSteps
+##   1:        0    1.7170
+##   2:        5    0.3396
+##  ---                   
+## 287:     2350    0.2264
+## 288:     2355    1.0755
 ```
 
 ### Plot the average number of the steps against the interval.
@@ -207,15 +210,16 @@ adjData[, intMeanSteps:= mean(steps, na.rm=TRUE), by=interval][
 
 ```r
 adjStepsPerDay <- adjData[, .(sumSteps = sum(steps)), keyby="date"]
-adjStepsPerDay[1:4]
+print(adjStepsPerDay)
 ```
 
 ```
-##          date sumSteps
-## 1: 2012-10-01    10766
-## 2: 2012-10-02      126
-## 3: 2012-10-03    11352
-## 4: 2012-10-04    12116
+##           date sumSteps
+##  1: 2012-10-01    10766
+##  2: 2012-10-02      126
+## ---                    
+## 60: 2012-11-29     7047
+## 61: 2012-11-30    10766
 ```
 
 ### Plot the revised frequency of total adjusted steps in a day
@@ -275,15 +279,16 @@ adjData[, daytype := factor(ifelse(wday(date) %in% c(1,7), "weekend", "weekday")
 
 ```r
 stepsPerIntervalDaytype <- adjData[, .(meanSteps = mean(steps)), by="daytype,interval"]
-stepsPerIntervalDaytype[1:4]
+print(stepsPerIntervalDaytype)
 ```
 
 ```
-##    daytype interval meanSteps
-## 1: weekday        0    2.2512
-## 2: weekday        5    0.4453
-## 3: weekday       10    0.1732
-## 4: weekday       15    0.1979
+##      daytype interval meanSteps
+##   1: weekday        0    2.2512
+##   2: weekday        5    0.4453
+##  ---                           
+## 575: weekend     2350    0.0283
+## 576: weekend     2355    0.1344
 ```
 
 ### Plot activity patterns for both weekends and weekdays

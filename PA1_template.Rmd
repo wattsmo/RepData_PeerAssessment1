@@ -15,6 +15,7 @@ This script uses three loadable libraries
 ```{r loadLibraries}
 library(data.table)
 options(datatable.print.topn=2)
+options(datatable.print.nrows=20)
 library(ggplot2)
 library(lubridate)
 ```
@@ -42,7 +43,7 @@ summary(data)
 
 ```{r}
 stepsPerDay <- data[, .(sumSteps = sum(steps, na.rm=TRUE)), keyby="date"]
-stepsPerDay[1:4]
+print(stepsPerDay)
 ```
 
 ### Plot the frequency of total steps per day
@@ -72,7 +73,7 @@ statsPerDay
 
 ```{r fig.width=6, fig.height=4}
 stepsPerInterval <- data[, .(meanSteps = mean(steps, na.rm=TRUE)), keyby="interval"]
-stepsPerInterval[1:4]
+print(stepsPerInterval)
 ```
 
 ### Plot the average number of the steps against the interval.
@@ -129,7 +130,7 @@ adjData[, intMeanSteps:= mean(steps, na.rm=TRUE), by=interval][
 
 ``` {r}
 adjStepsPerDay <- adjData[, .(sumSteps = sum(steps)), keyby="date"]
-adjStepsPerDay[1:4]
+print(adjStepsPerDay)
 ```
 
 ### Plot the revised frequency of total adjusted steps in a day
@@ -168,7 +169,7 @@ adjData[, daytype := factor(ifelse(wday(date) %in% c(1,7), "weekend", "weekday")
 
 ```{r}
 stepsPerIntervalDaytype <- adjData[, .(meanSteps = mean(steps)), by="daytype,interval"]
-stepsPerIntervalDaytype[1:4]
+print(stepsPerIntervalDaytype)
 ```
 
 ### Plot activity patterns for both weekends and weekdays
